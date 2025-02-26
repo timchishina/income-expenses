@@ -1,0 +1,22 @@
+.container {
+  padding: 0 36px;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  max-width: max-content;
+  margin: 0 auto;
+
+  .block {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    border: 1px black solid;
+    border-radius: 8px;
+  }
+}
