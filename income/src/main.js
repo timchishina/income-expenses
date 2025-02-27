@@ -1,19 +1,23 @@
 const ids = {
-  "budget": "Budget",
-  "expences": "Расходы",
-  "balance": "Баланс",
-  "tranzaction": "Транзакции",
-  "rent": "Аренда",
-  "food": "Еда",
-  "clothes": "Одежда",
-  "income": "Доход",
-  "expence": "Расход",
-  "sum": "Сумма"
+  "blocks": ["budget", "expences", "balance"],
+  "category": "category",
+  "type": "inout",
+  "open" : "openTranz",
+  "amount": "amount",
+  "history": "history"
 }
 const classes = {
   "block": "block",
-  "select": "selectsome",
-  "input": "inputsome"
+  "select": "select",
+  "input": "input",
+  "transactions": "transactions"
+}
+const values = {
+  "in": "income",
+  "out": "expense"
+}
+const types = {
+  "num": "number"
 }
 
 class App{
@@ -26,40 +30,84 @@ class App{
     return fetch(path).then(res => res.json())
   }
 
+  function getLang() {
+    if (this._langPath) {
+      this.langCache = fetch(this._langPath)
+    }
+    return this.langCache
+  }
+
   const lang = await fetchLang()
 
   function createBlock(num) {
     const block = document.createElement('div')
-    switch (num) {
-      case 1:
-        block.innerHTML = lang.block1
-        break
-      case 2:
-        block.innerHTML = lang.block2
-        break
-      case 3:
-        block1.innerHTML = lang.block3
-    }
+    const sum = document.createElement('span')
+    block.innerHTML = lang.blocks[num]
+    sum.id = ids.blocks[num]
+    block.appendChild(sum)
+    block.textContent += "₽"
     block.classList.add('block')
     return block
   }
 
   function createHeader() {
     const header = document.createElement('header')
-    const block1 = createBlock(1);
-    const block2 = createBlock(2);
-    const block3 =createBlock(3);
+    const block1 = createBlock(0);
+    const block2 = createBlock(1);
+    const block3 =createBlock(2);
     header.appendChild(block1)
     header.appendChild(block2)
     header.appendChild(block3)
     wrapper.appendChild(header)
   }
+  
+  function createHistory() {
+    const tranz = document.createElement('div')
+    const hh = document.createElement('h3')
+    hh.innerHTML = lang.transactions
+    const hist = document.createElement('ul')
+    hist.id = ids.history
+    const plus = document.createElement('button')
+    plus.id = ids.open
+    plus.innerHTML = lang.button
+    tranz.appendChild(hh)
+    tranz.appendChild(hist)
+    tranz.appendChild(plus)
+    tranz.classList.add(classes.transactions)
+    wrapper.appendChild(tranz)
+  }
 
-  function getLang() {
-    if (this._langPath) {
-      this.langCache = fetch(this._langPath)
+  function createTransaction() {
+    const tr = document.createElement('div')
+    const tx = document.createElement('h3')
+    tx.innerHTML = lang.addtr
+    tr.appendChild(tx)
+    const sel = document.createElement('select')
+    sel.id = ids.category
+    for (let i = 0; i < 3; i++) {
+      const opt = document.createElement('option')
+      opt.innerHTML = lang.options[i]
+      sel.appendChild(opt)
     }
-    return this.langCache
+    tr.appendChild(sel)
+    const typ = document.createElement('select')
+    for (let i = 0; i < 2; i++) {
+      const opt = document.createElement('option')
+      opt.innerHTML = lang.types[i]
+      opt.value = values[i]
+      typ.appendChild(opt)
+    }
+    tr.appendChild(typ)
+    const inp = document.createElement('input')
+    inp.type = types.num
+    inp.id = ids.amount
+    inp.placeholder = lang.sum
+    tr.appendChild(inp)
+    const ad = document.createElement('button')
+    ad.innerHTML = lang.add
+    ad.onclick = addTransaction()
+    tr.appendChild(ad)
+    wrapper.appendChild(tr)
   }
 }
 
