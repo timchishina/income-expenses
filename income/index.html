@@ -7,33 +7,10 @@
     <link rel="stylesheet" href="./src/style.css">
 </head>
 <body>
-  <!-- <div id="container"></div> -->
-    <div class="container">
-        <header>
-          <div class="block">Бюджет: <span id="budget">54000</span> ₽</div>
-          <div class="block">Расходы: <span id="expenses">23400</span> ₽</div>
-          <div class="block">Остаток: <span id="balance">2200</span> ₽</div>
-        </header>
-        <div class="transactions">
-          <h3>Транзакции</h3>
-          <button id="openTranz">+</button>
-          <ul id="history"></ul>
-        </div>
-
-        <div class="transacsstions">
-            <h3>Добавить транзакцию</h3>
-            <select id="category">
-                <option>Аренда</option>
-                <option>Еда</option>
-                <option>Одежда</option>
-            </select>
-            <select id="type">
-                <option value="income">Доход</option>
-                <option value="expense">Расход</option>
-            </select>
-            <input type="number" id="amount" placeholder="Сумма">
-            <button onclick="addTransaction()">Добавить</button>
-        </div>
-    </div>
+<div id="container"></div>
 </body>
+<script src="./src/main.js"></script>
+<script>
+    incomeApp('container', {langPath: 'lang.json'});
+</script>
 </html>
