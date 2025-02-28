@@ -165,7 +165,7 @@ async function incomeApp(containerId, params) {
                     };
                     this._pushToLocalStorage(LOCAL_STORAGE_KEYS.transactions, entry);
                     this._updateTable(entry);
-                    this._updateStats();
+                    this.updateStats();
                 } else {
                     alert(lang.fillInAllFieldsAlert);
                 }
