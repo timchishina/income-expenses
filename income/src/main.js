@@ -139,6 +139,7 @@ async function incomeApp(containerId, params) {
         async _createPopup() {
             const lang = await this.getLang()
             const popup = document.createElement('div');
+            popup.id = IDS.addTxPopup;
 
             const categorySelect = this._createSelect('category', lang.categories);
             const typeSelect = this._createSelect('type', lang.types);
