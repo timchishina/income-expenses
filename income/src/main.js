@@ -45,7 +45,6 @@ async function incomeApp(containerId, params) {
             const budget = txData.filter(tx => tx.type === 'доход').reduce((acc, tx) => acc + tx.sum, 0);
             const expences = txData.filter(tx => tx.type === 'расход').reduce((acc, tx) => acc + tx.sum, 0);
             const balance = budget - expences;
-            console.log(budget, expences, balance)
             document.getElementById(IDS.blocks[0]).textContent = budget || 0;
             document.getElementById(IDS.blocks[1]).textContent = expences || 0;
             document.getElementById(IDS.blocks[2]).textContent = balance || 0;
@@ -77,7 +76,6 @@ async function incomeApp(containerId, params) {
             table.appendChild(headerRow);
             const txData = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEYS.transactions)) || [];
             txData.forEach(tx => {
-                console.log(tx)
                 const row = this._createTableRow(tx);
                 table.appendChild(row);
             });
